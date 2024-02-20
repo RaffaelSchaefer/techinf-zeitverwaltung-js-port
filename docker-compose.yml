@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  node:
+    build: .
+    ports:
+      - "${NODE_PORT:-3000}:${NODE_PORT:-3000}"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: "postgresql://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@db:${POSTGRES_PORT:-5432}/${POSTGRES_NAME}"
+
+  db:
+    image: postgres:16.2-alpine3.18
+    restart: always
+    ports:
+      - "${POSTGRES_PORT:-5432}:${POSTGRES_PORT:-5432}"
+    environment:
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_DB: "${POSTGRES_NAME}"
+      POSTGRES_USER: "${POSTGRES_USERNAME}"
+      PGPORT: "${POSTGRES_PORT:-5432}"
