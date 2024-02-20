@@ -5,6 +5,7 @@
         "target": "ESNext",
         "sourceMap": true,
         "outDir": "dist",
+        "experimentalDecorators": true
     },
     "include": ["src/**/*"],
 }
