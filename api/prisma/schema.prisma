@@ -18,19 +18,12 @@ model User {
   id         Int       @id @default(autoincrement())
   first_name String
   last_name  String
+  status     Boolean   @default(false)
   positionId Int
   Position   Position  @relation(references: [id], fields: [positionId])
-  Status     Status?
-  Addresses  Address[]
   Logs       Log[]
+  Addresses  Address[]
   Cards      Card[]
-}
-
-model Status {
-  userID Int     @id @unique
-  status Boolean @default(false)
-  user   User    @relation(fields: [userID], references: [id], onDelete: Cascade)
-  Log    Log[]
 }
 
 model Card {
@@ -41,25 +34,26 @@ model Card {
 }
 
 model Address {
+  id           Int    @id @default(autoincrement())
   street_name  String
   house_number String
   town_name    String
   postal_code  String
   country      String
-  user         User   @relation(fields: [userId], references: [id])
+  User         User   @relation(fields: [userId], references: [id])
   userId       Int
 
-  @@id([street_name, house_number, town_name, postal_code, country, userId])
+  @@unique([street_name, house_number, town_name, postal_code, country, userId])
 }
 
 model Log {
-  time         DateTime @default(now())
-  card         Card     @relation(fields: [cardUid], references: [uid])
-  status       Status   @relation(fields: [statusUserID], references: [userID])
-  user         User     @relation(fields: [userId], references: [id])
-  cardUid      String
-  statusUserID Int
-  userId       Int
+  id      Int      @id @default(autoincrement())
+  time    DateTime @default(now())
+  status  Boolean
+  Card    Card     @relation(fields: [cardUid], references: [uid])
+  User    User     @relation(fields: [userId], references: [id])
+  cardUid String
+  userId  Int
 
-  @@id([time, cardUid])
+  @@unique([time, cardUid])
 }

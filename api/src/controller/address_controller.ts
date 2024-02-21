@@ -2,31 +2,31 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export default class UserController {
+export default class AddressController {
     static list = async (req, res, next) =>
-        res.json({ data: await prisma.user.findMany() });
+        res.json({ data: await prisma.address.findMany() });
     static read = async (req, res, next) =>
         res.json({
-            data: await prisma.user.findUnique({
+            data: await prisma.address.findUnique({
                 where: {
                     id: Number(req.params.id),
                 },
                 include: {
-                    Position: true,
-                    Addresses: true,
-                    Logs: true,
-                    Cards: true,
+                    User: true,
                 },
             }),
         });
     static create = async (req, res, next) => {
         try {
             res.status(201).json({
-                data: await prisma.user.create({
+                data: await prisma.address.create({
                     data: {
-                        first_name: req.body.data.first_name,
-                        last_name: req.body.data.last_name,
-                        positionId: req.body.data.positionId,
+                        street_name: req.body.data.street_name,
+                        house_number: req.body.data.house_number,
+                        town_name: req.body.data.town_name,
+                        postal_code: req.body.data.postal_code,
+                        country: req.body.data.country,
+                        userId: req.body.data.userId,
                     },
                 }),
             });
@@ -37,15 +37,17 @@ export default class UserController {
     static update = async (req, res, next) => {
         try {
             res.status(200).json({
-                data: await prisma.user.update({
+                data: await prisma.address.update({
                     where: {
                         id: Number(req.params.id),
                     },
                     data: {
-                        first_name: req.body.data.first_name,
-                        last_name: req.body.data.last_name,
-                        status: req.body.data.status,
-                        positionId: req.body.data.positionId,
+                        street_name: req.body.data.street_name,
+                        house_number: req.body.data.house_number,
+                        town_name: req.body.data.town_name,
+                        postal_code: req.body.data.postal_code,
+                        country: req.body.data.country,
+                        userId: req.body.data.userId,
                     },
                 }),
             });
@@ -57,7 +59,7 @@ export default class UserController {
         try {
             if (req.body.data.confirm) {
                 res.status(204).json({
-                    data: await prisma.user.delete({
+                    data: await prisma.address.delete({
                         where: {
                             id: Number(req.params.id),
                         },
