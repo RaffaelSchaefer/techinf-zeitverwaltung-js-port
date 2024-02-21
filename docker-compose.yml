@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  node:
-    build: .
+  express-api:
+    build: ./api
     ports:
       - "${NODE_PORT:-3000}:${NODE_PORT:-3000}"
     depends_on:

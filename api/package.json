@@ -6,7 +6,7 @@
     "type": "module",
     "scripts": {
         "build": "npx tsc",
-        "start": "node dist/index.js",
+        "start": "npx prisma migrate dev --name init && node dist/index.js",
         "dev": "nodemon -r ts-node/register src/index.ts"
     },
     "author": "Raffael Elias Schäfer",
