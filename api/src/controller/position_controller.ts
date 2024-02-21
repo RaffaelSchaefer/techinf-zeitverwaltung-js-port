@@ -1,14 +1,18 @@
 import { PrismaClient } from "@prisma/client";
+import { Request, Response, NextFunction } from "express";
 
-//TODO write Error Handler (decorator)
+import errorHandler from "./util.js";
 
 const prisma = new PrismaClient();
 
 export default class PositionController {
-    static list = async (req, res, next) =>
-        res.json({ data: await prisma.position.findMany() });
-    static read = async (req, res, next) =>
-        res.json({
+    @errorHandler
+    static async list(req: Request, res: Response, next: NextFunction) {
+        return res.json({ data: await prisma.position.findMany() });
+    }
+    @errorHandler
+    static async read(req: Request, res: Response, next: NextFunction) {
+        return res.json({
             data: await prisma.position.findUnique({
                 where: {
                     id: Number(req.params.id),
@@ -18,48 +22,40 @@ export default class PositionController {
                 },
             }),
         });
-    static create = async (req, res, next) => {
-        try {
-            res.status(201).json({
-                data: await prisma.position.create({
-                    data: { name: req.body.data.name },
-                }),
-            });
-        } catch (error) {
-            res.status(400).json({ error: String(error) });
-        }
-    };
-    static update = async (req, res, next) => {
-        try {
-            res.status(200).json({
-                data: await prisma.position.update({
+    }
+    @errorHandler
+    static async create(req: Request, res: Response, next: NextFunction) {
+        return res.status(201).json({
+            data: await prisma.position.create({
+                data: { name: req.body.data.name },
+            }),
+        });
+    }
+    @errorHandler
+    static async update(req: Request, res: Response, next: NextFunction) {
+        return res.status(200).json({
+            data: await prisma.position.update({
+                where: {
+                    id: Number(req.params.id),
+                },
+                data: {
+                    name: req.body.data.name,
+                },
+            }),
+        });
+    }
+    @errorHandler
+    static async delete(req: Request, res: Response, next: NextFunction) {
+        if (req.body.data.confirm) {
+            return res.status(204).json({
+                data: await prisma.position.delete({
                     where: {
                         id: Number(req.params.id),
                     },
-                    data: {
-                        name: req.body.data.name,
-                    },
                 }),
             });
-        } catch (error) {
-            res.status(400).json({ error: String(error) });
-        }
-    };
-    static delete = async (req, res, next) => {
-        try {
-            if (req.body.data.confirm) {
-                res.status(204).json({
-                    data: await prisma.position.delete({
-                        where: {
-                            id: Number(req.params.id),
-                        }
-                    }),
-                });
-            } else {
-                throw Error("No Confirmation")
-            }
-        } catch (error) {
-            res.status(400).json({ error: String(error) });
+        } else {
+            throw Error("No Confirmation");
         }
     }
 }
