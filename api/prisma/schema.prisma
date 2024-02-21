@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
 }
 
@@ -19,11 +19,11 @@ model User {
   first_name String
   last_name  String
   positionId Int
-  position   Position  @relation(references: [id], fields: [positionId])
+  Position   Position  @relation(references: [id], fields: [positionId])
   Status     Status?
-  Card       Card[]
   Address    Address[]
   Log        Log[]
+  Cards      Card[]
 }
 
 model Status {
@@ -35,9 +35,9 @@ model Status {
 
 model Card {
   uid    String @id
-  user   User?  @relation(fields: [userId], references: [id])
-  userId Int?
   Log    Log[]
+  User   User?  @relation(fields: [userId], references: [id])
+  userId Int?
 }
 
 model Address {
