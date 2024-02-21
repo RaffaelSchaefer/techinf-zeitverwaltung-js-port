@@ -21,8 +21,8 @@ model User {
   positionId Int
   Position   Position  @relation(references: [id], fields: [positionId])
   Status     Status?
-  Address    Address[]
-  Log        Log[]
+  Addresses  Address[]
+  Logs       Log[]
   Cards      Card[]
 }
 

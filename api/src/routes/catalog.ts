@@ -1,6 +1,7 @@
 import express from "express";
 import position_controller from "../controller/position_controller.js";
 import card_controller from "../controller/card_controller.js";
+import user_controller from "../controller/user_controller.js"
 
 const router = express.Router()
 
@@ -17,5 +18,11 @@ router.get('/cards/:uid', card_controller.read)
 router.post('/cards/create', card_controller.create)
 router.post('/cards/update/:uid', card_controller.update)
 router.post('/cards/delete/:uid', card_controller.delete)
+
+router.get('/users', user_controller.list)
+router.get('/users/:id', user_controller.read)
+router.post('/users/create', user_controller.create)
+router.post('/users/update/:id', user_controller.update)
+router.post('/users/delete/:id', user_controller.delete)
 
 export const catalogRouter = router
