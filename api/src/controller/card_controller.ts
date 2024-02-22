@@ -19,7 +19,7 @@ export default class CardController {
                 },
                 include: {
                     User: true,
-                    Log: true,
+                    Logs: true,
                 },
             }),
         });

@@ -28,7 +28,7 @@ model User {
 
 model Card {
   uid    String @id
-  Log    Log[]
+  Logs   Log[]
   User   User?  @relation(fields: [userId], references: [id])
   userId Int?
 }

@@ -1,6 +1,15 @@
 version: '3.8'
 
 services:
+  vite-frontend:
+    build: ./frontend
+    ports:
+      - "${VITE_PORT:-3000}:3000"
+    depends_on:
+      - express-api
+    environment:
+      API_URL: "http://localhost:${NODE_PORT:-3000}"
+
   express-api:
     build: ./api
     ports:
