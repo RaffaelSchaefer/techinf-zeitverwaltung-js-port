@@ -8,7 +8,13 @@ const prisma = new PrismaClient();
 export default class AddressController {
     @errorHandler
     static async list(req: Request, res: Response, next: NextFunction) {
-        return res.json({ data: await prisma.address.findMany() });
+        return res.json({
+            data: await prisma.address.findMany({
+                orderBy: {
+                    street_name: "asc",
+                },
+            }),
+        });
     }
     @errorHandler
     static async read(req: Request, res: Response, next: NextFunction) {

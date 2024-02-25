@@ -1,5 +1,3 @@
-//TODO Sort Get path alphabetical
-
 import express from "express";
 
 import position_controller from "../controller/position_controller.js";

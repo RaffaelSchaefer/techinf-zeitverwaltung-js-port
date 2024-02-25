@@ -8,11 +8,24 @@ const prisma = new PrismaClient();
 export default class CardController {
     @errorHandler
     static async list(req: Request, res: Response, next: NextFunction) {
-        return res.json({ data: await prisma.card.findMany() });
+        return res.json({
+            data: await prisma.card.findMany({
+                orderBy: {
+                    uid: "asc",
+                },
+            }),
+        });
     }
     @errorHandler
     static async free(req: Request, res: Response, next: NextFunction) {
-        return res.json({ data: await prisma.card.findMany({where: {userId: null}}) });
+        return res.json({
+            data: await prisma.card.findMany({
+                where: { userId: null },
+                orderBy: {
+                    uid: "asc",
+                },
+            }),
+        });
     }
     @errorHandler
     static async read(req: Request, res: Response, next: NextFunction) {

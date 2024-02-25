@@ -8,7 +8,11 @@ const prisma = new PrismaClient();
 export default class UserController {
     @errorHandler
     static async list(req: Request, res: Response, next: NextFunction) {
-        return res.json({ data: await prisma.user.findMany() });
+        return res.json({ data: await prisma.user.findMany({
+            orderBy: {
+                first_name: 'asc',
+            }
+        }) });
     }
     @errorHandler
     static async read(req: Request, res: Response, next: NextFunction) {

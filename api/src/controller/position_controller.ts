@@ -8,7 +8,13 @@ const prisma = new PrismaClient();
 export default class PositionController {
     @errorHandler
     static async list(req: Request, res: Response, next: NextFunction) {
-        return res.json({ data: await prisma.position.findMany() });
+        return res.json({
+            data: await prisma.position.findMany({
+                orderBy: {
+                    name: "asc",
+                },
+            }),
+        });
     }
     @errorHandler
     static async read(req: Request, res: Response, next: NextFunction) {

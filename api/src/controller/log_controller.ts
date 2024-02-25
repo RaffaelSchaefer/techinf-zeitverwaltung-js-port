@@ -8,7 +8,13 @@ const prisma = new PrismaClient();
 export default class LogController {
     @errorHandler
     static async list(req: Request, res: Response, next: NextFunction) {
-        return res.json({ data: await prisma.log.findMany() });
+        return res.json({
+            data: await prisma.log.findMany({
+                orderBy: {
+                    id: "desc",
+                },
+            }),
+        });
     }
     @errorHandler
     static async read(req: Request, res: Response, next: NextFunction) {
