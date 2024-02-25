@@ -1,6 +1,7 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 import Container from "react-bootstrap/Container";
+import { Link } from "react-router-dom";
 
 function NotFound() {
     return (
@@ -10,7 +11,7 @@ function NotFound() {
                 <h1 className="display-3">404 Page not found</h1>
                 <p className="lead">
                     The requested URL was not found on this server <br />
-                    <a className="w-bold text-decoration-none(" href="/">return to home</a>
+                    <Link className="w-bold text-decoration-none(" to="/">return to home</Link>
                 </p>
             </div>
         </Container>

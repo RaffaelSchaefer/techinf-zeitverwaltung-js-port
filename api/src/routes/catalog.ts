@@ -1,3 +1,5 @@
+//TODO Sort Get path alphabetical
+
 import express from "express";
 
 import position_controller from "../controller/position_controller.js";
@@ -7,8 +9,6 @@ import address_controller from "../controller/address_controller.js";
 import log_controller from "../controller/log_controller.js"
 
 const router = express.Router()
-
-router.get('/', (req, res, next) => {res.send("Hallo Welt")})
 
 router.get('/positions', position_controller.list)
 router.get('/positions/:id', position_controller.read)
