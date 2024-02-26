@@ -3,10 +3,10 @@ import User from "./User"
 
 export default interface Card {
     uid: string,
-    userId: number
+    userId: number | null
 }
 
 export interface CardDetail extends Card {
-    User: User,
+    User: User | null,
     Logs: Log[]
 }

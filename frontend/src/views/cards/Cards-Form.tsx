@@ -3,30 +3,31 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import { FormProps } from "../../interfaces/From";
-import { PositionDetail } from "../../interfaces/Position";
+import { CardDetail } from "../../interfaces/Card";
 
 import Error from "../../components/Error";
 import BasicSpinner from "../../components/Spinner";
 
 import { Container, Form, Button } from "react-bootstrap";
 
-const Position_Form: React.FC<FormProps> = ({ update = false }) => {
-    const [position, setPosition] = useState<PositionDetail>({
-        name: "",
-        id: -1,
-        Users: [],
+const Card_Form: React.FC<FormProps> = ({ update = false }) => {
+    const [card, setCard] = useState<CardDetail>({
+        uid: "",
+        userId: null,
+        User: null,
+        Logs: [],
     });
     const [error, setError] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(update);
-    const { id } = useParams<{ id: string }>();
-    const url = `http://localhost:80/positions/${id}`;
+    const { uid } = useParams<{ uid: string }>();
+    const url = `http://localhost:80/cards/${uid}`;
     const redirect = useNavigate();
 
     useEffect(() => {
-        const updatePosition = async () => {
+        const updateCard = async () => {
             try {
                 const response = await axios.get(url);
-                setPosition(response.data.data);
+                setCard(response.data.data);
                 setError(response.data.error);
                 setLoading(false);
             } catch (error) {
@@ -35,26 +36,26 @@ const Position_Form: React.FC<FormProps> = ({ update = false }) => {
             }
         };
         if (update) {
-            updatePosition();
+            updateCard();
         }
     }, [url]);
 
-    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPosition({ ...position, name: e.target.value });
+    const handleUIDChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setCard({ ...card, uid: e.target.value });
     };
 
-    const sendPosition = async () => {
+    const sendUID = async () => {
         try {
-            if (position?.name === "") {
-                throw new globalThis.Error("Position Name can not be empty");
+            if (card?.uid === "") {
+                throw new globalThis.Error("Card uid can not be empty");
             }
             const response = await axios.post(
                 update
-                    ? `http://localhost:80/positions/update/${position?.id}`
-                    : "http://localhost:80/positions/create",
-                { data: position }
+                    ? `http://localhost:80/cards/update/${uid}`
+                    : "http://localhost:80/cards/create",
+                { data: card }
             );
-            redirect(`/positions/${response.data.data?.id}`);
+            redirect(`/cards/${response.data.data?.uid}`);
         } catch (error) {
             setError(String(error));
         }
@@ -66,25 +67,31 @@ const Position_Form: React.FC<FormProps> = ({ update = false }) => {
                 <BasicSpinner />
             ) : (
                 <>
-                    <h1 className="display-5">{update ? "Update position" : "Create new position"}</h1>
+                    <h1 className="display-5">
+                        {update ? "Update card" : "Register a new card"}
+                    </h1>
                     {error && <Error error={error}></Error>}
                     <Form>
-                        <Form.Label for="name">Position name</Form.Label>
+                        <Form.Label for="uid">Card UID</Form.Label>
                         <Form.Control
                             type="text"
-                            id="name"
-                            name="name"
-                            placeholder="Enter position name"
+                            id="uid"
+                            name="uid"
+                            placeholder="Enter card UID"
                             required
-                            value={position?.name}
-                            onChange={handleNameChange}
+                            value={card?.uid}
+                            onChange={handleUIDChange}
                         ></Form.Control>
+                        <Form.Text>
+                            The UID is the unique identifier of your Card
+                        </Form.Text>
+                        <br/>
                         <Button
                             variant="primary"
                             className="mt-3"
-                            onClick={sendPosition}
+                            onClick={sendUID}
                         >
-                            {update ? "Update position" : "Create new position"}
+                            {update ? "Update card" : "Register card"}
                         </Button>
                     </Form>
                 </>
@@ -93,4 +100,4 @@ const Position_Form: React.FC<FormProps> = ({ update = false }) => {
     );
 };
 
-export default Position_Form;
+export default Card_Form;

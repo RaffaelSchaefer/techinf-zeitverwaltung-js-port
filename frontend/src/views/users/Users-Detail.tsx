@@ -8,7 +8,6 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
 
 import { UserDetail } from "../../interfaces/User";
 
@@ -54,7 +53,7 @@ function User_Detail() {
                         </Badge>
                     </h1>
                     <Row>
-                        <Col>
+                        <Col className="mb-5 pb-5">
                             {error && <Error error={error}></Error>}
                             <ListGroup>
                                 <ListGroup.Item className="d-flex justify-content-between align-items-center">
@@ -147,13 +146,15 @@ function User_Detail() {
                         </Col>
                     </Row>
                     <Container className="fixed-bottom pb-3">
-                        <ButtonGroup>
-                            <Button variant="success">
-                                Grant Card Ownership
-                            </Button>
-                            <Button variant="primary">Update User</Button>
-                            <Button variant="danger">Remove User</Button>
-                        </ButtonGroup>
+                        <Button variant="success" className="mb-1">
+                            Grant Card Ownership
+                        </Button>
+                        <Button variant="primary" className="ms-1 mb-1">
+                            Update User
+                        </Button>
+                        <Button variant="danger" className="ms-1 mb-1">
+                            Remove User
+                        </Button>
                     </Container>
                 </>
             )}

@@ -4,7 +4,6 @@ import axios from "axios";
 
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
 
 import { CardDetail } from "../../interfaces/Card";
 
@@ -52,19 +51,24 @@ function Card_Detail() {
                         <p>This card has no Owner</p>
                     )}
                     <Container className="fixed-bottom pb-3">
-                        <ButtonGroup>
-                            {card?.userId === null ? (
-                                <Button variant="success">
-                                    Grant Card Ownership
-                                </Button>
-                            ) : (
-                                <Button variant="warning">
-                                    Remove Card Ownership
-                                </Button>
-                            )}
-                            <Button variant="primary">Update Card</Button>
-                            <Button variant="danger">Remove Card</Button>
-                        </ButtonGroup>
+                        <Button
+                            variant={
+                                card?.userId === null ? "success" : "warning"
+                            }
+                            className="mb-1"
+                        >
+                            {card?.userId === null
+                                ? "Grant card ownership"
+                                : "Remove card ownership"}
+                        </Button>
+                        <Link to={`/cards/update/${card?.uid}`}>
+                            <Button variant="primary" className="ms-1 mb-1">
+                                Update Card
+                            </Button>
+                        </Link>
+                        <Button variant="danger" className="ms-1 mb-13">
+                            Remove Card
+                        </Button>
                     </Container>
                 </>
             )}

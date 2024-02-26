@@ -98,7 +98,11 @@ function Cards_List() {
                         </ListGroup>
                     )}
                     <Container className="fixed-bottom pb-3">
-                        <Button variant="primary">Register a new card</Button>
+                        <Link to="/cards/create">
+                            <Button variant="primary">
+                                Register a new card
+                            </Button>
+                        </Link>
                     </Container>
                 </>
             )}
