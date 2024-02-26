@@ -2,11 +2,17 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
+import ListGroup from "react-bootstrap/ListGroup";
+import Badge from "react-bootstrap/Badge";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+
 import { UserDetail } from "../../interfaces/User";
 
 import Error from "../../components/Error";
-
-import { ListGroup, Badge, Container, Row, Col } from "react-bootstrap";
 import BasicSpinner from "../../components/Spinner";
 
 function User_Detail() {
@@ -140,6 +146,15 @@ function User_Detail() {
                             />
                         </Col>
                     </Row>
+                    <Container className="fixed-bottom pb-3">
+                        <ButtonGroup>
+                            <Button variant="success">
+                                Grant Card Ownership
+                            </Button>
+                            <Button variant="primary">Update User</Button>
+                            <Button variant="danger">Remove User</Button>
+                        </ButtonGroup>
+                    </Container>
                 </>
             )}
         </Container>

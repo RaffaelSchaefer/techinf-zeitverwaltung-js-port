@@ -98,6 +98,13 @@ function Position_List() {
                             </ListGroup.Item>
                         ))}
                     </ListGroup>
+                    <Container className="fixed-bottom pb-3">
+                        <Link to="/positions/create">
+                            <Button variant="primary">
+                                Create new position
+                            </Button>
+                        </Link>
+                    </Container>
                 </>
             )}
         </Container>

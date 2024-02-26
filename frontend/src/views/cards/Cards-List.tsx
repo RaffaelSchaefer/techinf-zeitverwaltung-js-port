@@ -5,7 +5,7 @@ import axios from "axios";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
-import Container  from "react-bootstrap/Container";
+import Container from "react-bootstrap/Container";
 
 import Card from "../../interfaces/Card";
 
@@ -97,6 +97,9 @@ function Cards_List() {
                             ))}
                         </ListGroup>
                     )}
+                    <Container className="fixed-bottom pb-3">
+                        <Button variant="primary">Register a new card</Button>
+                    </Container>
                 </>
             )}
         </Container>

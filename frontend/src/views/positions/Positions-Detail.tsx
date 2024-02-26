@@ -7,7 +7,7 @@ import { PositionDetail } from "../../interfaces/Position";
 import Error from "../../components/Error";
 import BasicSpinner from "../../components/Spinner";
 
-import { Container, ListGroup } from "react-bootstrap";
+import { Container, ListGroup, ButtonGroup, Button } from "react-bootstrap";
 
 function Position_Detail() {
     const [position, setPosition] = useState<PositionDetail>();
@@ -57,6 +57,16 @@ function Position_Detail() {
                     ) : (
                         <p>There are no Users with this Position</p>
                     )}
+                    <Container className="fixed-bottom pb-3">
+                        <ButtonGroup>
+                            <Link to={`/positions/update/${position?.id}`}>
+                                <Button variant="warning">
+                                    Update position
+                                </Button>
+                            </Link>
+                            <Button variant="danger">Remove position</Button>
+                        </ButtonGroup>
+                    </Container>
                 </>
             )}
         </Container>

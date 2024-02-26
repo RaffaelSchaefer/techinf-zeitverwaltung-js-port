@@ -43,10 +43,10 @@ function Users_List() {
                     `${user.first_name} ${user.last_name}`.includes(search)
                 )
             );
-            setLoading(false)
+            setLoading(false);
         } catch (error) {
             setError(String(error));
-            setLoading(false)
+            setLoading(false);
         }
     };
 
@@ -99,6 +99,9 @@ function Users_List() {
                             </ListGroup.Item>
                         ))}
                     </ListGroup>
+                    <Container className="fixed-bottom pb-3">
+                        <Button variant="primary">Create new card</Button>
+                    </Container>
                 </>
             )}
         </Container>
