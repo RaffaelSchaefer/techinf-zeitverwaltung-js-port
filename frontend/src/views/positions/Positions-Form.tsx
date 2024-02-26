@@ -85,8 +85,7 @@ const Position_Form: React.FC<FormProps> = ({ update = false }) => {
                             className="mt-3"
                             onClick={sendPosition}
                         >
-                            {" "}
-                            Create new position
+                            {update ? "Update position" : "Create new position"}
                         </Button>
                     </Form>
                 </>
