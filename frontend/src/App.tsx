@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "./views/Home";
@@ -15,24 +16,27 @@ import Position_Form from "./views/positions/Positions-Form";
 import Navigation from "./components/Navigation";
 
 function App() {
+    const queryClient = new QueryClient();
     return (
-        <Router>
-            <Navigation />
-            <Routes>
-                <Route index element={<Home />} />
-                <Route path="users" element={<User_List />} />
-                <Route path="users/:id" element={<User_Detail />} />
-                <Route path="cards" element={<Cards_List />} />
-                <Route path="cards/:uid" element={<Card_Detail />} />
-                <Route path="cards/create" element={<Card_Form />} />
-                <Route path="cards/update/:uid" element={<Card_Form update />} />
-                <Route path="positions" element={<Position_List />} />
-                <Route path="positions/:id" element={<Position_Detail />} />
-                <Route path="positions/create" element={<Position_Form />} />
-                <Route path="positions/update/:id"element={<Position_Form update />} />
-                <Route path="*" element={<NotFound />} />
-            </Routes>
-        </Router>
+        <QueryClientProvider client={queryClient}>
+            <Router>
+                <Navigation />
+                <Routes>
+                    <Route index element={<Home />} />
+                    <Route path="users" element={<User_List />} />
+                    <Route path="users/:id" element={<User_Detail />} />
+                    <Route path="cards" element={<Cards_List />} />
+                    <Route path="cards/:uid" element={<Card_Detail />} />
+                    <Route path="cards/create" element={<Card_Form />} />
+                    <Route path="cards/update/:uid" element={<Card_Form update />} />
+                    <Route path="positions" element={<Position_List />} />
+                    <Route path="positions/:id" element={<Position_Detail />} />
+                    <Route path="positions/create" element={<Position_Form />} />
+                    <Route path="positions/update/:id" element={<Position_Form update />} />
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+            </Router>
+        </QueryClientProvider>
     );
 }
 

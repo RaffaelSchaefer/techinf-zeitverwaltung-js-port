@@ -11,6 +11,7 @@
     "serve": "npx serve dist/"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.24.1",
     "axios": "^1.6.7",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",

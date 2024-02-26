@@ -1,5 +1,6 @@
-import React from 'react';
-import Alert from 'react-bootstrap/Alert';
+import React from "react";
+import { Container } from "react-bootstrap";
+import Alert from "react-bootstrap/Alert";
 
 interface ErrorProps {
     error: string;
@@ -8,11 +9,13 @@ interface ErrorProps {
 
 const Error: React.FC<ErrorProps> = ({ error, variant = "danger" }) => {
     return (
-        <Alert variant={variant} dismissible>
-            <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-            <p>{error}</p>
-        </Alert>
+        <Container className="mt-5">
+            <Alert variant={variant}>
+                <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+                <p>{error}</p>
+            </Alert>
+        </Container>
     );
-}
+};
 
 export default Error;
