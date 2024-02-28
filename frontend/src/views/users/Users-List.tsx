@@ -78,7 +78,9 @@ function Users_List() {
                 </ListGroup>
             )}
             <Container className="fixed-bottom pb-3">
-                <Button variant="primary">Create new card</Button>
+                <Link to="/users/create">
+                    <Button variant="primary">Create new card</Button>
+                </Link>
             </Container>
         </Container>
     );

@@ -67,7 +67,6 @@ const Card_Form: React.FC<FormProps> = ({ update = false }) => {
                 <Form.Control
                     type="text"
                     id="uid"
-                    name="uid"
                     placeholder="Enter card UID"
                     required
                     value={card?.uid}

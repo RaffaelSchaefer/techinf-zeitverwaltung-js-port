@@ -7,7 +7,7 @@ export default interface Address {
     town_name: string,
     postal_code: string,
     country: string,
-    userId: string
+    userId: number
 }
 
 export interface AddressDetail extends Address {

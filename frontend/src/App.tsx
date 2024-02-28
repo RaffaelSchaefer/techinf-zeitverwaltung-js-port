@@ -6,6 +6,7 @@ import NotFound from "./views/NotFound";
 
 import User_List from "./views/users/Users-List";
 import User_Detail from "./views/users/Users-Detail";
+import User_Form from "./views/users/Users-Form"
 import Cards_List from "./views/cards/Cards-List";
 import Card_Detail from "./views/cards/Cards-Detail";
 import Card_Form from "./views/cards/Cards-Form";
@@ -25,6 +26,8 @@ function App() {
                     <Route index element={<Home />} />
                     <Route path="users" element={<User_List />} />
                     <Route path="users/:id" element={<User_Detail />} />
+                    <Route path="users/create" element={<User_Form />} />
+                    <Route path="users/update/:id" element={<User_Form update />} />
                     <Route path="cards" element={<Cards_List />} />
                     <Route path="cards/:uid" element={<Card_Detail />} />
                     <Route path="cards/create" element={<Card_Form />} />

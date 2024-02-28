@@ -133,9 +133,11 @@ function User_Detail() {
                 <Button variant="success" className="mb-1">
                     Grant Card Ownership
                 </Button>
-                <Button variant="primary" className="ms-1 mb-1">
-                    Update User
-                </Button>
+                <Link to={`/users/update/${user?.id}`}>
+                    <Button variant="primary" className="ms-1 mb-1">
+                        Update User
+                    </Button>
+                </Link>
                 <Button variant="danger" className="ms-1 mb-1">
                     Remove User
                 </Button>
