@@ -130,17 +130,21 @@ function User_Detail() {
                 </Col>
             </Row>
             <Container className="fixed-bottom pb-3">
-                <Button variant="success" className="mb-1">
-                    Grant Card Ownership
-                </Button>
+                <Link to="/grant-ownership">
+                    <Button variant="success" className="mb-1">
+                        Grant Card Ownership
+                    </Button>
+                </Link>
                 <Link to={`/users/update/${user?.id}`}>
                     <Button variant="primary" className="ms-1 mb-1">
                         Update User
                     </Button>
                 </Link>
-                <Button variant="danger" className="ms-1 mb-1">
-                    Remove User
-                </Button>
+                <Link to={`/user/delete/${user?.id}`}>
+                    <Button variant="danger" className="ms-1 mb-1">
+                        Remove User
+                    </Button>
+                </Link>
             </Container>
         </Container>
     );

@@ -20,7 +20,7 @@ const User_Form: React.FC<FormProps> = ({ update = false }) => {
         first_name: "",
         last_name: "",
         status: false,
-        positionId: -1,
+        positionId: 1,
         Addresses: [
             {
                 id: -1,
@@ -29,7 +29,7 @@ const User_Form: React.FC<FormProps> = ({ update = false }) => {
                 town_name: "",
                 postal_code: "",
                 country: "",
-                userId: "",
+                userId: -1,
             },
         ],
         Logs: [],
@@ -77,16 +77,17 @@ const User_Form: React.FC<FormProps> = ({ update = false }) => {
 
     const sendUser = useMutation({
         mutationFn: async () => {
-            const userResponse = await post(user, "users", update ? id : null);
-            user.Addresses[0].userId = user.id;
-            console.log(user.Addresses[0]);
-            await post(
-                user.Addresses[0],
-                "address",
-                update && user.Addresses[0].id !== -1
-                    ? String(user.Addresses[0].id)
-                    : null
-            );
+            const userResponse: UserDetail = await post(user, "users", update ? id : null);
+            if (userResponse && userResponse.id) {
+                user.Addresses[0].userId = userResponse.id;
+                await post(
+                    user.Addresses[0],
+                    "address",
+                    update && user.Addresses[0].id !== -1
+                        ? String(user.Addresses[0].id)
+                        : null
+                );
+            }
             return userResponse;
         },
         onSuccess: (data: UserDetail) => {

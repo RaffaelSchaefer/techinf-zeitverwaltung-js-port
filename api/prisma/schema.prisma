@@ -29,7 +29,7 @@ model User {
 model Card {
   uid    String @id
   Logs   Log[]
-  User   User?  @relation(fields: [userId], references: [id])
+  User   User?  @relation(fields: [userId], references: [id], onDelete: SetNull)
   userId Int?
 }
 
@@ -40,7 +40,7 @@ model Address {
   town_name    String
   postal_code  String
   country      String
-  User         User   @relation(fields: [userId], references: [id])
+  User         User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       Int
 
   @@unique([street_name, house_number, town_name, postal_code, country, userId])
@@ -50,9 +50,9 @@ model Log {
   id      Int      @id @default(autoincrement())
   time    DateTime @default(now())
   status  Boolean
-  Card    Card     @relation(fields: [cardUid], references: [uid])
-  User    User     @relation(fields: [userId], references: [id])
-  cardUid String
+  Card    Card?    @relation(fields: [cardUid], references: [uid], onDelete: SetNull)
+  User    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cardUid String?
   userId  Int
 
   @@unique([time, cardUid])

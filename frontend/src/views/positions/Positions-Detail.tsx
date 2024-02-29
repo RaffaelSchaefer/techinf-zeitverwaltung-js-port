@@ -10,15 +10,15 @@ import { PositionDetail } from "../../interfaces/Position";
 
 function Position_Detail() {
     const { id } = useParams<{ id: string }>();
-    
+
     const {
         data: position,
         isLoading,
         error,
     } = useQuery({
         queryFn: async () => {
-            const position: PositionDetail = await get(`positions/${id}`)
-            return position
+            const position: PositionDetail = await get(`positions/${id}`);
+            return position;
         },
         queryKey: ["position"],
     });
@@ -53,9 +53,11 @@ function Position_Detail() {
                         Update position
                     </Button>
                 </Link>
-                <Button variant="danger" className="ms-1 mb-1">
-                    Remove position
-                </Button>
+                <Link to={`/positions/delete/${position?.id}`}>
+                    <Button variant="danger" className="ms-1 mb-1">
+                        Remove position
+                    </Button>
+                </Link>
             </Container>
         </Container>
     );

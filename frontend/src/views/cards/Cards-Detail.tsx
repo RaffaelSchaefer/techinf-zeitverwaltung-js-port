@@ -12,7 +12,7 @@ import BasicSpinner from "../../components/Spinner";
 
 function Card_Detail() {
     const { uid } = useParams<{ uid: string }>();
-    
+
     const {
         data: card,
         isLoading,
@@ -42,22 +42,26 @@ function Card_Detail() {
                 <p>This card has no Owner</p>
             )}
             <Container className="fixed-bottom pb-3">
-                <Button
-                    variant={card?.userId === null ? "success" : "warning"}
-                    className="mb-1"
-                >
-                    {card?.userId === null
-                        ? "Grant card ownership"
-                        : "Remove card ownership"}
-                </Button>
+                <Link to={card?.userId === null ? "/grant-ownership" : `/remove-ownership/${card?.uid}`}>
+                    <Button
+                        variant={card?.userId === null ? "success" : "warning"}
+                        className="mb-1"
+                    >
+                        {card?.userId === null
+                            ? "Grant card ownership"
+                            : "Remove card ownership"}
+                    </Button>
+                </Link>
                 <Link to={`/cards/update/${card?.uid}`}>
                     <Button variant="primary" className="ms-1 mb-1">
                         Update Card
                     </Button>
                 </Link>
-                <Button variant="danger" className="ms-1 mb-13">
-                    Remove Card
-                </Button>
+                <Link to={`/cards/delete/${card?.uid}`}>
+                    <Button variant="danger" className="ms-1 mb-13">
+                        Remove Card
+                    </Button>
+                </Link>
             </Container>
         </Container>
     );

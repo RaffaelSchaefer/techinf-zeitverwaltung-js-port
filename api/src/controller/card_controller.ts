@@ -17,17 +17,6 @@ export default class CardController {
         });
     }
     @errorHandler
-    static async free(req: Request, res: Response, next: NextFunction) {
-        return res.json({
-            data: await prisma.card.findMany({
-                where: { userId: null },
-                orderBy: {
-                    uid: "asc",
-                },
-            }),
-        });
-    }
-    @errorHandler
     static async read(req: Request, res: Response, next: NextFunction) {
         return res.json({
             data: await prisma.card.findUnique({
