@@ -6,12 +6,14 @@
     "type": "module",
     "scripts": {
         "build": "npx tsc",
+        "init": "node ./dist/init.js",
         "start": "npx prisma migrate dev --name init && node dist/index.js",
         "dev": "nodemon -r ts-node/register src/index.ts"
     },
     "author": "Raffael Elias Schäfer",
     "license": "MIT",
     "dependencies": {
+        "@faker-js/faker": "^8.4.1",
         "@prisma/client": "^5.9.1",
         "cors": "^2.8.5",
         "dotenv": "^16.4.5",
