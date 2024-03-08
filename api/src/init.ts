@@ -49,12 +49,12 @@ for (let i = 0; i < demoSize; i++) {
             ...(isEmptyCard
                 ? {}
                 : {
-                      User: {
-                          connect: {
-                              id: Math.floor(Math.random() * demoSize) + 1,
-                          },
-                      },
-                  }),
+                    User: {
+                        connect: {
+                            id: Math.floor(Math.random() * demoSize) + 1,
+                        },
+                    },
+                }),
             uid: Math.floor(Math.random() * 100000000000).toString(16),
         },
     });
