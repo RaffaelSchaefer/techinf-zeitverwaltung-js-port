@@ -40,8 +40,7 @@ router.post('/logs/update/:id', log_controller.update)
 router.post('/logs/delete/:id', log_controller.delete)
 
 router.post('/login', login_controller.login)
-router.post('/logout', login_controller.logout)
 router.post('/register', login_controller.register)
-router.post('/forget', login_controller.forget)
+router.post('/forget/:name', login_controller.forget)
 
 export const catalogRouter = router
