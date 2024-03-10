@@ -17,6 +17,7 @@ import Position_List from "./views/positions/Positions-List";
 import Position_Detail from "./views/positions/Positions-Detail";
 import Position_Form from "./views/positions/Positions-Form";
 import Position_Delete from "./views/positions/Positions-Delete";
+import Register from "./views/login/Register";
 
 function Router() {
     return (
@@ -39,6 +40,7 @@ function Router() {
             <Route path="positions/create" element={<Position_Form />} />
             <Route path="positions/update/:id" element={<Position_Form update />} />
             <Route path="positions/delete/:id" element={<Position_Delete />} />
+            <Route path="register" element={<Register />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     );

@@ -26,6 +26,13 @@ model User {
   Cards      Card[]
 }
 
+model Admin {
+  email    String  @unique
+  password String
+  name     String  @id
+  verified Boolean @default(false)
+}
+
 model Card {
   uid    String @id
   Logs   Log[]
