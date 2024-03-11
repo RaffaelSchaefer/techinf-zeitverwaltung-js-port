@@ -73,7 +73,7 @@ const Login = () => {
                         special characters, or emoji.
                     </Form.Text>
                 </Form.Group>
-                <Form.Text className="text-muted">If you dont have an account please register<Link to="/register" className="ms-1 fw-bold text-decoration-none">here</Link></Form.Text>
+                <Form.Text className="text-muted">If you don't have an account please register<Link to="/register" className="ms-1 fw-bold text-decoration-none">here</Link></Form.Text>
                 <br/>
                 <Button type="submit" className="mt-3">Login</Button>
             </Form>

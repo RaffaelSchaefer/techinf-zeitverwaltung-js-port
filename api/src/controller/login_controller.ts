@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { Request, Response, NextFunction } from "express";
-import * as bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 import errorHandler from "./util.js";
@@ -38,7 +38,6 @@ export function authHandler(
                 where: { name: decoded.name },
             });
             if (!admin) throw new Error("Admin not found");
-            if (admin.verified === false) throw new Error("Admin not verified");
             await originalMethod.apply(this, [req, res, next]);
         } catch (error) {
             throw new Error(String(error));
@@ -56,7 +55,7 @@ export default class LoginController {
         });
         if (!admin)
             return res.status(400).json({ error: "Username not found" });
-        const match = await bcrypt.compare(
+        const match = await bcrypt.compareSync(
             req.body.data.password,
             admin.password
         );
@@ -78,7 +77,7 @@ export default class LoginController {
         const admin = await prisma.admin.create({
             data: {
                 name: req.body.data.name,
-                password: await bcrypt.hash(req.body.data.password, saltRounds),
+                password: await bcrypt.hashSync(req.body.data.password, saltRounds),
                 email: req.body.data.email,
             },
         });
