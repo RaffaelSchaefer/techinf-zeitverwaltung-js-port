@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate, Link } from "react-router-dom";
 import { Container, Form, Button, InputGroup } from "react-bootstrap";
@@ -27,7 +27,9 @@ const Login = () => {
             auth.login(admin.name, admin.password);
         },
         onSuccess: () => {
-            redirect(`/`);
+            setTimeout(() => {
+                redirect(`/`);
+            }, 1000);
         },
         onError: (error: Error) => {
             setError(error.message);

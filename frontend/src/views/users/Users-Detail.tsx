@@ -140,7 +140,7 @@ function User_Detail() {
                         Update User
                     </Button>
                 </Link>
-                <Link to={`/user/delete/${user?.id}`}>
+                <Link to={`/users/delete/${user?.id}`}>
                     <Button variant="danger" className="ms-1 mb-1">
                         Remove User
                     </Button>
@@ -151,5 +151,3 @@ function User_Detail() {
 }
 
 export default User_Detail;
-
-//TODO Turn to Component

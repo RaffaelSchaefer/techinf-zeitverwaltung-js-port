@@ -1,7 +1,6 @@
-import { useContext, useState, useEffect } from "react";
 import { Routes, Route, Outlet } from "react-router-dom";
 
-import { AuthContext } from "./services/provider.auth.service";
+import PrivateRoute from "./components/PrivateRoute";
 
 import Home from "./views/Home";
 import NotFound from "./views/NotFound";
@@ -24,24 +23,9 @@ import Login from "./views/login/Login";
 
 function Router() {
 
-    const auth = useContext(AuthContext);
-    const [isAuthenticated, setIsAuthenticated] = useState(!!auth?.status);
-
-    useEffect(() => {
-        setIsAuthenticated(!!auth?.status);
-    }, [auth?.status]);
-
-    function renderRoutes() {
-    
-        if (!isAuthenticated) return (
-            <>
-                <Route index element={<Login />} />
-                <Route path="register" element={<Register />} />
-            </>
-        )
-    
-        return (
-            <>
+    return (
+        <Routes>
+            <Route element={<PrivateRoute/>} >
                 <Route index element={<Home />} />
                 <Route path="users" element={<Outlet />}>
                     <Route index element={<User_List />} />
@@ -66,14 +50,9 @@ function Router() {
                 </Route>
                 <Route path="remove-ownership/:uid" element={<Remove_Ownership />} />
                 <Route path="grant-ownership" element={<Grant_Ownership />} />
-            </>
-        ) 
-    
-    }
-
-    return (
-        <Routes>
-            {renderRoutes()}
+            </Route>
+            <Route path="register" element={<Register />} />
+            <Route path="login" element={<Login />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     );
