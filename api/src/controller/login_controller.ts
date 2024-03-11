@@ -29,7 +29,7 @@ export function authHandler(
         next: NextFunction
     ) {
         try {
-            const token = req.headers.authorization;
+            const token = req.headers.authorization.split(" ")[1];
             if (!token) throw new Error("No token provided");
             const decoded: decodedToken = jwt.verify(token, key);
             if (decoded.exp < Date.now() / 1000)
