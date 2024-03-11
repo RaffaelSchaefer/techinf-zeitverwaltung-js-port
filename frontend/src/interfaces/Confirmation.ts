@@ -1,11 +1,7 @@
 export default interface Confirmation {
-    data: {
-        confirm: boolean;
-    }
+    confirm: boolean;
 }
 
 export const defaultConfirmation: Confirmation = {
-    data: {
-        confirm: true
-    }
-}
+    confirm: true,
+};

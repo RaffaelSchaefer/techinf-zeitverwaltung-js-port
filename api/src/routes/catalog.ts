@@ -4,7 +4,8 @@ import position_controller from "../controller/position_controller.js";
 import card_controller from "../controller/card_controller.js";
 import user_controller from "../controller/user_controller.js";
 import address_controller from "../controller/address_controller.js";
-import log_controller from "../controller/log_controller.js"
+import log_controller from "../controller/log_controller.js";
+import login_controller from "../controller/login_controller.js";
 
 const router = express.Router()
 
@@ -37,5 +38,9 @@ router.get('/logs/:id', log_controller.read)
 router.post('/logs/create', log_controller.create)
 router.post('/logs/update/:id', log_controller.update)
 router.post('/logs/delete/:id', log_controller.delete)
+
+router.post('/login', login_controller.login)
+router.post('/register', login_controller.register)
+router.post('/forget/:name', login_controller.forget)
 
 export const catalogRouter = router

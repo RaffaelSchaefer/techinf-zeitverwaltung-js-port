@@ -1,10 +1,25 @@
-import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate, NavLink } from "react-router-dom";
+import { Button, Navbar, Nav, Container } from "react-bootstrap";
 
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+import { AuthContext } from "../services/provider.auth.service";
 
 function Navigation() {
+    const redirect = useNavigate();
+    const auth = useContext(AuthContext);
+
+    const logout = useMutation({
+        mutationFn: async () => {
+            auth.logout();
+        },
+        onSuccess: () => {
+            setTimeout(() => {
+                redirect(`/login`);
+            }, 100);
+        }
+    });
+
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container fluid>
@@ -16,6 +31,7 @@ function Navigation() {
                         <Nav.Link as={NavLink} to="/users">Users</Nav.Link>
                         <Nav.Link as={NavLink} to="/cards">Cards</Nav.Link>
                         <Nav.Link as={NavLink} to="/positions">Positions</Nav.Link>
+                        {auth.status && <Button variant="outline-danger" onClick={() => {logout.mutate()}}>Logout</Button>}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
